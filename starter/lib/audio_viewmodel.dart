@@ -77,11 +77,7 @@ class AudioViewModel extends ChangeNotifier {
     });
 
     _player.onPlayerStateChanged.listen((AudioPlayerState s) {
-      if (s == AudioPlayerState.PLAYING) {
-        print('playing');
-      }
       if (s == AudioPlayerState.COMPLETED) {
-        print('reached end');
         _isPlaying = false;
         _currentTime = Duration();
         notifyListeners();
