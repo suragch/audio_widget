@@ -48,7 +48,9 @@ class AudioViewModel extends ChangeNotifier {
   Duration _totalTime = Duration(milliseconds: 1);
 
   bool get isPlaying => _isPlaying;
+
   Duration get currentTime => _currentTime;
+
   Duration get totalTime => _totalTime;
 
   Future loadData() async {
@@ -96,44 +98,6 @@ class AudioViewModel extends ChangeNotifier {
     _isPlaying = isPlaying;
     notifyListeners();
   }
-
-//  Future changePlayState(bool isPlaying, String fileName) async {
-//    print(_currentTime);
-//    if (isPlaying) {
-//      _play();
-//    } else {
-//      _pause();
-//    }
-//  }
-//
-//  Future _play() async {
-//    if (_player.state == AudioPlayerState.COMPLETED
-//        || _player.state == AudioPlayerState.STOPPED) {
-//      await _player.play(_url);
-//    } else {
-//      await _player.resume();
-//    }
-//    _isPlaying = true;
-//    notifyListeners();
-//  }
-//
-//  Future _pause() async {
-//    await _player.pause();
-//    _isPlaying = false;
-//    notifyListeners();
-//  }
-
-//  void play() async {
-//    await _player.resume();
-//    _isPlaying = true;
-//    notifyListeners();
-//  }
-//
-//  void pause() async {
-//    await _player.pause();
-//    _isPlaying = false;
-//    notifyListeners();
-//  }
 
   void seek(Duration position) async {
     await _player.seek(position);
