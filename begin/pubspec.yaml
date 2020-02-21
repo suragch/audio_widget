@@ -1,0 +1,23 @@
+name: classical
+description: A demo project for the audio_widget package
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.2.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  provider_architecture: 1.0.5
+  audioplayers: ^0.14.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/furelise.mp3
+    - assets/beethoven.jpg
