@@ -51,15 +51,24 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
-          child: Column(
+          child: Stack(
             children: <Widget>[
-              Spacer(),
-              Image.asset(
-                'assets/beethoven.jpg',
-                fit: BoxFit.fitHeight,
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 60.0),
+                  child: Image.asset(
+                    'assets/beethoven.jpg',
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
-              Spacer(),
-              AudioPlayer(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: AudioPlayer(),
+                ),
+              ),
             ],
           ),
         ),

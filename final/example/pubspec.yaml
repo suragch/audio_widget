@@ -13,8 +13,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  provider_architecture: 1.0.5
-  audioplayers: ^0.14.0
+  provider_architecture: ^1.0.6
+  audioplayers: ^0.15.0
   audio_widget:
     path: ../
 
