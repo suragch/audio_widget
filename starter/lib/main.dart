@@ -35,7 +35,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+import 'package:classical/audio_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,7 +47,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
             children: <Widget>[
@@ -67,6 +68,13 @@ class MyApp extends StatelessWidget {
 class AudioPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ViewModelBuilder<AudioViewModel>.reactive(
+        viewModelBuilder: () => AudioViewModel(),
+        onModelReady: (model) => model.loadData(),
+        builder: (context, model, child) {
+          return Container(); // TODO delete this line
+          //return AudioWidget(); // TODO uncomment this line
+        }
+    );
   }
 }

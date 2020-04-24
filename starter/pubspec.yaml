@@ -9,12 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  stacked: ^1.1.0
+  audioplayers: ^0.15.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  provider_architecture: 1.0.5
-  audioplayers: ^0.14.0
 
 flutter:
   uses-material-design: true

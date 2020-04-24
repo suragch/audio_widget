@@ -37,7 +37,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:audio_widget/audio_widget.dart';
-import 'package:provider_architecture/provider_architecture.dart';
+import 'package:stacked/stacked.dart';
 
 import 'audio_viewmodel.dart';
 
@@ -50,28 +50,39 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
-        body: SafeArea(
-          child: Stack(
-            children: <Widget>[
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 60.0),
-                  child: Image.asset(
-                    'assets/beethoven.jpg',
-                    fit: BoxFit.contain,
-                  ),
-                ),
+        body: BodyWidget(),
+      ),
+    );
+  }
+}
+
+class BodyWidget extends StatelessWidget {
+  const BodyWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Stack(
+        children: <Widget>[
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 60.0),
+              child: Image.asset(
+                'assets/beethoven.jpg',
+                fit: BoxFit.contain,
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: AudioPlayer(),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: AudioPlayer(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -80,8 +91,8 @@ class MyApp extends StatelessWidget {
 class AudioPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<AudioViewModel>.withConsumer(
-      viewModel: AudioViewModel(),
+    return ViewModelBuilder<AudioViewModel>.reactive(
+      viewModelBuilder: () => AudioViewModel(),
       onModelReady: (model) => model.loadData(),
       builder: (context, model, child) => AudioWidget(
         isPlaying: model.isPlaying,

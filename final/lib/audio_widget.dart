@@ -116,61 +116,58 @@ class _AudioWidgetState extends State<AudioWidget> {
 
   IconButton _buildPlayPauseButton() {
     return IconButton(
-          icon:
-          (widget.isPlaying)
-              ? Icon(Icons.pause)
-              : Icon(Icons.play_arrow),
-          color: Colors.white,
-          onPressed: () {
-            if (widget.onPlayStateChanged != null) {
-              widget.onPlayStateChanged(!widget.isPlaying);
-            }
-          },
-        );
+      icon: (widget.isPlaying) ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+      color: Colors.white,
+      onPressed: () {
+        if (widget.onPlayStateChanged != null) {
+          widget.onPlayStateChanged(!widget.isPlaying);
+        }
+      },
+    );
   }
 
   Text _buildCurrentTimeLabel() {
     return Text(
-          _getTimeString(_sliderValue),
-          style: TextStyle(
-            color: Colors.white,
-            fontFeatures: [FontFeature.tabularFigures()],
-          ),
-        );
+      _getTimeString(_sliderValue),
+      style: TextStyle(
+        color: Colors.white,
+        fontFeatures: [FontFeature.tabularFigures()],
+      ),
+    );
   }
 
   Expanded _buildSeekBar() {
     return Expanded(
-          child: Slider(
-            value: _sliderValue,
-            activeColor: Colors.white,
-            inactiveColor: Colors.grey,
-            onChangeStart: (value) {
-              _userIsMovingSlider = true;
-            },
-            onChanged: (value) {
-              setState(() {
-                _sliderValue = value;
-              });
-            },
-            onChangeEnd: (value) {
-              _userIsMovingSlider = false;
-              if (widget.onSeekBarMoved != null) {
-                final currentTime = _getDuration(value);
-                widget.onSeekBarMoved(currentTime);
-              }
-            },
-          ),
-        );
+      child: Slider(
+        value: _sliderValue,
+        activeColor: Colors.white,
+        inactiveColor: Colors.grey,
+        onChangeStart: (value) {
+          _userIsMovingSlider = true;
+        },
+        onChanged: (value) {
+          setState(() {
+            _sliderValue = value;
+          });
+        },
+        onChangeEnd: (value) {
+          _userIsMovingSlider = false;
+          if (widget.onSeekBarMoved != null) {
+            final currentTime = _getDuration(value);
+            widget.onSeekBarMoved(currentTime);
+          }
+        },
+      ),
+    );
   }
 
   Text _buildTotalTimeLabel() {
     return Text(
-          _getTimeString(1.0),
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        );
+      _getTimeString(1.0),
+      style: TextStyle(
+        color: Colors.white,
+      ),
+    );
   }
 
   // Adapted from [Duration.toString()].
@@ -183,9 +180,9 @@ class _AudioWidgetState extends State<AudioWidget> {
     }
 
     final minutes =
-    twoDigits(time.inMinutes.remainder(Duration.minutesPerHour));
+        twoDigits(time.inMinutes.remainder(Duration.minutesPerHour));
     final seconds =
-    twoDigits(time.inSeconds.remainder(Duration.secondsPerMinute));
+        twoDigits(time.inSeconds.remainder(Duration.secondsPerMinute));
 
     final hours = widget.totalTime.inHours > 0 ? '${time.inHours}:' : '';
     return "$hours$minutes:$seconds";
