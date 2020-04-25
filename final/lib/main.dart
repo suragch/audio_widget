@@ -35,11 +35,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+import 'package:classical/audio_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:audio_widget/audio_widget.dart';
 import 'package:stacked/stacked.dart';
-
-import 'audio_viewmodel.dart';
+import 'audio_widget.dart';
 
 void main() => runApp(MyApp());
 
@@ -64,27 +63,25 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        children: <Widget>[
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 60.0),
-              child: Image.asset(
-                'assets/beethoven.jpg',
-                fit: BoxFit.contain,
-              ),
+    return Stack(
+      children: <Widget>[
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 60.0),
+            child: Image.asset(
+              'assets/beethoven.jpg',
+              fit: BoxFit.contain,
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: AudioPlayer(),
-            ),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: AudioPlayer(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -109,3 +106,4 @@ class AudioPlayer extends StatelessWidget {
     );
   }
 }
+

@@ -7,4 +7,4 @@ version:
   revision: fabeb2a16f1d008ab8230f450c49141d35669798
   channel: beta
 
-project_type: package
+project_type: app

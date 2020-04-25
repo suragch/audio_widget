@@ -35,10 +35,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-library audio_widget;
-
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 /// AudioWidget is a UI component to allow users to interact with an audio
@@ -97,13 +94,12 @@ class _AudioWidgetState extends State<AudioWidget> {
       _sliderValue = _getSliderValue();
     }
     return Container(
-      color: Colors.transparent,
       height: 60,
       child: Row(
         children: [
           _buildPlayPauseButton(),
           _buildCurrentTimeLabel(),
-          _buildSeekBar(),
+          _buildSeekBar(context),
           _buildTotalTimeLabel(),
           SizedBox(width: 16),
         ],
@@ -113,7 +109,11 @@ class _AudioWidgetState extends State<AudioWidget> {
 
   IconButton _buildPlayPauseButton() {
     return IconButton(
-      icon: (widget.isPlaying) ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+      icon:
+      (widget.isPlaying)
+          ? Icon(Icons.pause)
+          : Icon(Icons.play_arrow),
+      color: Colors.white,
       onPressed: () {
         if (widget.onPlayStateChanged != null) {
           widget.onPlayStateChanged(!widget.isPlaying);
@@ -131,20 +131,23 @@ class _AudioWidgetState extends State<AudioWidget> {
     );
   }
 
-  Expanded _buildSeekBar() {
+  Expanded _buildSeekBar(BuildContext context) {
     return Expanded(
       child: Slider(
         value: _sliderValue,
         activeColor: Theme.of(context).textTheme.body1.color,
         inactiveColor: Theme.of(context).disabledColor,
+        // 1
         onChangeStart: (value) {
           _userIsMovingSlider = true;
         },
+        // 2
         onChanged: (value) {
           setState(() {
             _sliderValue = value;
           });
         },
+        // 3
         onChangeEnd: (value) {
           _userIsMovingSlider = false;
           if (widget.onSeekBarMoved != null) {
@@ -162,24 +165,6 @@ class _AudioWidgetState extends State<AudioWidget> {
     );
   }
 
-  // Adapted from [Duration.toString()].
-  String _getTimeString(double sliderValue) {
-    final time = _getDuration(sliderValue);
-
-    String twoDigits(int n) {
-      if (n >= 10) return "$n";
-      return "0$n";
-    }
-
-    final minutes =
-        twoDigits(time.inMinutes.remainder(Duration.minutesPerHour));
-    final seconds =
-        twoDigits(time.inSeconds.remainder(Duration.secondsPerMinute));
-
-    final hours = widget.totalTime.inHours > 0 ? '${time.inHours}:' : '';
-    return "$hours$minutes:$seconds";
-  }
-
   double _getSliderValue() {
     if (widget.currentTime == null) {
       return 0;
@@ -190,5 +175,20 @@ class _AudioWidgetState extends State<AudioWidget> {
   Duration _getDuration(double sliderValue) {
     final seconds = widget.totalTime.inSeconds * sliderValue;
     return Duration(seconds: seconds.toInt());
+  }
+
+  String _getTimeString(double sliderValue) {
+    final time = _getDuration(sliderValue);
+
+    String twoDigits(int n) {
+      if (n >= 10) return "$n";
+      return "0$n";
+    }
+
+    final minutes = twoDigits(time.inMinutes.remainder(Duration.minutesPerHour));
+    final seconds = twoDigits(time.inSeconds.remainder(Duration.secondsPerMinute));
+
+    final hours = widget.totalTime.inHours > 0 ? '${time.inHours}:' : '';
+    return "$hours$minutes:$seconds";
   }
 }

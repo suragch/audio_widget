@@ -1,5 +1,5 @@
 name: classical
-description: A demo project for the audio_widget package
+description: A demo project for audio_widget
 
 version: 1.0.0+1
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  stacked: ^1.1.0
+  stacked: ^1.2.0
   audioplayers: ^0.15.1
 
 dev_dependencies:
