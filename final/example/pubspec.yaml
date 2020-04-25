@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  stacked: ^1.1.0
+  stacked: ^1.2.0
   audioplayers: ^0.15.1
   audio_widget:
     path: ../

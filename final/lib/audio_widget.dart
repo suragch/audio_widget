@@ -51,7 +51,7 @@ class AudioWidget extends StatefulWidget {
     this.onPlayStateChanged,
     this.currentTime,
     this.onSeekBarMoved,
-    this.totalTime,
+    @required this.totalTime,
   }) : super(key: key);
 
   /// When [isPlaying] is `true`, the play button displays a pause icon. When
@@ -82,22 +82,19 @@ class AudioWidget extends StatefulWidget {
 
 class _AudioWidgetState extends State<AudioWidget> {
   double _sliderValue;
-  Duration _currentTime;
   bool _userIsMovingSlider;
 
   @override
   void initState() {
     super.initState();
     _sliderValue = _getSliderValue();
-    _currentTime = widget.currentTime;
     _userIsMovingSlider = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_currentTime != widget.currentTime && !_userIsMovingSlider) {
+    if (!_userIsMovingSlider) {
       _sliderValue = _getSliderValue();
-      _currentTime = widget.currentTime;
     }
     return Container(
       color: Colors.transparent,
@@ -117,7 +114,6 @@ class _AudioWidgetState extends State<AudioWidget> {
   IconButton _buildPlayPauseButton() {
     return IconButton(
       icon: (widget.isPlaying) ? Icon(Icons.pause) : Icon(Icons.play_arrow),
-      color: Colors.white,
       onPressed: () {
         if (widget.onPlayStateChanged != null) {
           widget.onPlayStateChanged(!widget.isPlaying);
@@ -130,7 +126,6 @@ class _AudioWidgetState extends State<AudioWidget> {
     return Text(
       _getTimeString(_sliderValue),
       style: TextStyle(
-        color: Colors.white,
         fontFeatures: [FontFeature.tabularFigures()],
       ),
     );
@@ -140,8 +135,8 @@ class _AudioWidgetState extends State<AudioWidget> {
     return Expanded(
       child: Slider(
         value: _sliderValue,
-        activeColor: Colors.white,
-        inactiveColor: Colors.grey,
+        activeColor: Theme.of(context).textTheme.body1.color,
+        inactiveColor: Theme.of(context).disabledColor,
         onChangeStart: (value) {
           _userIsMovingSlider = true;
         },
@@ -164,9 +159,6 @@ class _AudioWidgetState extends State<AudioWidget> {
   Text _buildTotalTimeLabel() {
     return Text(
       _getTimeString(1.0),
-      style: TextStyle(
-        color: Colors.white,
-      ),
     );
   }
 
@@ -189,6 +181,9 @@ class _AudioWidgetState extends State<AudioWidget> {
   }
 
   double _getSliderValue() {
+    if (widget.currentTime == null) {
+      return 0;
+    }
     return widget.currentTime.inMilliseconds / widget.totalTime.inMilliseconds;
   }
 

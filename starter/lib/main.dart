@@ -46,19 +46,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       home: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Spacer(),
-              Image.asset(
-                'assets/beethoven.jpg',
-                fit: BoxFit.fitHeight,
+        backgroundColor: Colors.black,
+        body: Stack(
+          children: <Widget>[
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 60.0),
+                child: Image.asset(
+                  'assets/beethoven.jpg',
+                  fit: BoxFit.contain,
+                ),
               ),
-              Spacer(),
-              AudioPlayer(),
-            ],
-          ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: AudioPlayer(),
+              ),
+            ),
+          ],
         ),
       ),
     );
