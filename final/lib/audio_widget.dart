@@ -135,7 +135,7 @@ class _AudioWidgetState extends State<AudioWidget> {
     return Expanded(
       child: Slider(
         value: _sliderValue,
-        activeColor: Theme.of(context).textTheme.body1.color,
+        activeColor: Theme.of(context).textTheme.bodyText2.color,
         inactiveColor: Theme.of(context).disabledColor,
         // 1
         onChangeStart: (value) {

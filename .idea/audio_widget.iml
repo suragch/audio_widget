@@ -7,8 +7,6 @@
       <excludeFolder url="file://$MODULE_DIR$/final/build" />
       <excludeFolder url="file://$MODULE_DIR$/final/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/final/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/final/example/build/app/intermediates/flutter/debug/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/final/example/build/app/intermediates/merged_assets/debug/out/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/final/example/ios/.symlinks/plugins/audioplayers/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/final/example/ios/.symlinks/plugins/audioplayers/build" />
       <excludeFolder url="file://$MODULE_DIR$/final/example/ios/.symlinks/plugins/audioplayers/example/.pub" />
